@@ -1,4 +1,4 @@
-package ClientSide;
+package testing;
 
 import java.io.BufferedOutputStream;
 import java.io.FileOutputStream;

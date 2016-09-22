@@ -1,4 +1,4 @@
-package ClientSide;
+package testing;
 
 import java.io.File;
 import java.io.IOException;
