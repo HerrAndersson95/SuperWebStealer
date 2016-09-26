@@ -53,6 +53,7 @@ public class ClientGui {
 	private JButton btnStart;
 	private JButton btnStop;
 	private JButton btnClr;
+	private boolean isRuning = false;
 
 	/**
 	 * Create the application.
@@ -124,6 +125,7 @@ public class ClientGui {
 		 */
 		btnStart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				start();
 			}
 		});
 		
@@ -175,6 +177,7 @@ public class ClientGui {
 		 */
 		btnStop.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				stop();
 			}
 		});
 		
@@ -211,6 +214,7 @@ public class ClientGui {
 		 */
 		btnClr.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				clearChat();
 			}
 		});
 		
@@ -256,12 +260,36 @@ public class ClientGui {
 		  String path = file.toPath().toString() + "\\";
 		  System.out.println(path);
 		  writeStatus("Save location set to: " + path);
-		  
+		  saveDest.setText(path);	//Sets GUIs path text
 		}
 	}
 	
 	public void writeStatus(String msg){
 		StatusArea.append("\n" + msg);
 	}
+
+	public void clearChat(){
+		StatusArea.setText("");
+		StatusArea.setText("Program log was cleared");
+	}
+	
+	public void start(){
+		if(isRuning){
+			writeStatus("Program running, stop it before restarting");
+			return;
+		}
+		if(saveDest.getText().equals("File save location is not set")){
+			writeStatus("Save destination was not set");
+			return;
+		}
+		writeStatus("--program started--");
+		isRuning = true;
+	}
+	
+	public void stop(){
+		writeStatus("--Program stopped--");
+		isRuning = false;
+	}
+	
 
 }
