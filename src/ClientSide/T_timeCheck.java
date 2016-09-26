@@ -22,7 +22,7 @@ public class T_timeCheck extends Thread{
 		    SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
 		    System.out.println(sdf.format(cal.getTime()));
 			try {
-				sleep(interval*1000);
+				sleep(interval*1000*60);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 				System.out.println("ERROR: timeCheck sleep failed");
