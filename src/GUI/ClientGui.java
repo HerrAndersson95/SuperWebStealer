@@ -21,6 +21,8 @@ import javax.swing.JFileChooser;
 
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.awt.event.ActionEvent;
 
 public class ClientGui {
@@ -273,6 +275,15 @@ public class ClientGui {
 		StatusArea.setText("Program log was cleared");
 	}
 	
+	public boolean checkInterval(){
+		try{
+			int val = Integer.parseInt(time.getText());
+			return true;
+		} catch (NumberFormatException e1){
+			return false;
+		}
+	}
+	
 	public void start(){
 		if(isRuning){
 			writeStatus("Program running, stop it before restarting");
@@ -282,13 +293,32 @@ public class ClientGui {
 			writeStatus("Save destination was not set");
 			return;
 		}
+		if(!checkAddress()){
+			writeStatus("The inputed webb address is faulty");
+			return;
+		}
+		if(!checkInterval()){
+			writeStatus("The interval must be defined in numbers");
+			return;
+		}
 		writeStatus("--program started--");
+		writeStatus("Set interval is: " + time.getText());
 		isRuning = true;
 	}
 	
 	public void stop(){
 		writeStatus("--Program stopped--");
 		isRuning = false;
+	}
+	
+	public boolean checkAddress(){
+		try {
+			URL tmp = new URL(site.getText());
+			return true;
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 	
 
